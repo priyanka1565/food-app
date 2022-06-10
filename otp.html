@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otp_Page</title>
+    <style>
+
+        body{
+            background-color: rgb(251,213,144);
+        }
+        #box{
+            background-color: rgb(50,189,254);
+            border: 2px solid black;
+            margin: auto;
+            width: 400px;
+            height: 400px;
+            margin-top: 100px;
+            font-size: 30px;
+            padding-left: 30px;
+        }
+        input{
+            font-size: 30px;
+            color: black;
+            text-align: center;
+        }
+        button{
+            background-color: black;
+            color: whitesmoke;
+            font-size: 30px;
+            margin-left: 120px;
+            margin-top: 20px;
+        }
+        #h1{
+            text-align: center;
+        }
+  
+    </style>
+</head>
+<body>
+ 
+
+
+<h1 id="h1">OTP_PAGE</h1>
+<div id="box">
+    <label for="">OTP</label>
+    <input type="number" placeholder="Enter OTP" id="OTP">
+    <button onclick="done()"> PlaceOrder</button>
+</div>  
+</body>
+</html>
+
+<script>
+    var id;
+    function done() {
+        
+        //let otp = document.getElementById("otp").value;
+       id = setTimeout(function(){
+           alert("Please Click On Each Event")
+       },100)
+       id = setTimeout(function(){
+           alert("Your Order is Pack")
+       },2000)
+
+       id = setTimeout(function(){
+           alert("Your order is ready for Dispatch")
+       },4000)
+        
+       id = setTimeout(function(){
+           alert(" Your Order Is Succsessfully Place,You Recive Update,Thanks ")
+       },6000)
+       
+       // we used messaging system here for genrate message
+    }
+</script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #fooddiv {
+            display: grid;
+            grid-template-columns: repeat(4,25%);
+            width: 300p;
+            height: 300px;
+        }
+        img{
+            width: 300p;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="foodcart.html"></a>
+    <a href="menu.html"></a>
+    <a href="otp.html"></a>
+ 
+   
+   <h1>food</h1>
+
+   <div id="fooddiv"></div>
+</body>
+</html>
+
+<script>
+   async function getData() {
+       try{
+           let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata`;
+
+           let res = await fetch(url);
+           let data = await res.json();
+           let user = data.meals;
+           showData(user)
+           console.log("data",user);
+
+       }
+       catch(error){
+        console.log(error);
+       }
+   }
+   getData();
+
+   function showData(user) {
+    
+        user.forEach(function(el){
+          let maindiv = document.getElementById("fooddiv");
+          let div = document.createElement("div");
+            maindiv.appendChild(div);
+
+         
+          let img = document.createElement("img");
+          img.src = el.strMealThumb;
+
+          let p1 = document.createElement("p");
+          p1.innerText = el.strCategory;
+
+          let tag = document.createElement("p");
+          tag.innerText = el.strTags;
+
+          let ytb = document.createElement("link");
+          ytb.href = el.strYoutube;
+
+            div.append(img,p1,tag,ytb);
+
+        })
+        
+  
+   }
+</script>

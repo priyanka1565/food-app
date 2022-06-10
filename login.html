@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        body{
+            background-color: rgb(251,213,144);
+        }
+        #box{
+            background-color: rgb(50,189,254);
+            border: 2px solid black;
+            margin: auto;
+            width: 400px;
+            height: 400px;
+            margin-top: 100px;
+            font-size: 30px;
+            padding-left: 30px;
+        }
+        input{
+            font-size: 30px;
+            color: black;
+            text-align: center;
+        }
+        button{
+            background-color: black;
+            color: whitesmoke;
+            font-size: 30px;
+            margin-left: 120px;
+            margin-top: 20px;
+        }
+        #h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="food.html"></a>
+    <a href="foodcart.html"></a>
+    <a href="menu.html"></a>
+    <a href="otp.html">
+   <h1 id="h1">LogIn_Page</h1> 
+   <div id="box">
+    <label for="">Email</label>
+    <input type="email" placeholder="Enter Email" id="email">
+    <label for="">Password</label>
+    <input type="password" placeholder="Enter password" id="pass">
+    <button>Login</button>
+   </div>
+</body>
+</html>
+<script>
+    //we use same local storage of signin page
+    document.querySelector("button").addEventListener("click",signin);
+    var regUser = JSON.parse(localStorage.getItem("user"));
+    //console.log(regUser);
+    function signin(e){
+       e.preventDefault();
+        let email = document.getElementById("email").value;
+        let pass = document.getElementById("pass").value;
+        for(let i=0;i<regUser.length;i++){
+            
+            if(regUser[i].Email === email && regUser[i].Pass=== pass){
+              alert("siginup Succsessfully")
+              window.location.href = "menu.html"
+            }
+        }
+    }
+</script>

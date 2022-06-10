@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <style>
+        #div1{
+            display: grid;
+            grid-template-columns: repeat(4,25%);
+        }
+        img{
+            width: 200px;
+            height: 400px;
+        }
+        p{
+            font-size: 30px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        button{
+            background-color: yellowgreen;
+        }
+        a{
+            text-decoration: none;
+            font-size: 25px;
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <button><a href="cart.html">GotoCart</a></button>
+    <div id="div1"></div>
+</body>
+</html>
+
+<script>
+  
+    var product = JSON.parse(localStorage.getItem("shoppingBag"));
+    var cart = JSON.parse(localStorage.getItem("cartItem")) || [];
+    
+     displayItem(product);
+    function displayItem(product){
+        product.map(function(item){
+            let main_div = document.getElementById("div1");
+            let div = document.createElement("div");
+            main_div.appendChild(div);
+
+            let name = document.createElement("p");
+            name.innerText = item.Name;
+
+            let type = document.createElement("p");
+            type.innerText = item.Type;
+
+            let price = document.createElement("p");
+            price.innerText =item.Price;
+
+            let img = document.createElement("img");
+            img.src = item.Img_url;
+
+            let btn = document.createElement("button");
+            btn.innerText = "Add To Cart";
+
+            btn.addEventListener("click",function(){
+               addToCart(item);
+            });
+            div.append(img, name, type, price, btn);
+            
+        });
+    }
+    function addToCart(item){
+        //console.log(item);
+
+        // in unit3 item get from api 
+        // we have to store in local storage
+
+        cart.push(item);
+        localStorage.setItem("cartItem",JSON.stringify(cart));
+        window.location.href = "cart.html";
+    }
+   
+</script>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYMENT_PAGE</title>
+    <style>
+        body{
+            background-color: rgb(251,213,144);
+        }
+        #fooddiv {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            width: 300p;
+            height: 300px;
+            margin-top: 100px;
+            padding-left: 90px;
+        }
+    
+        img {
+            width: 300p;
+            height: 300px;
+        }
+        #box{
+          display: flex;
+          justify-content: space-around;
+          width: 1000px;
+          height: 700px;
+          /* border: 5px solid grey; */
+          margin-left: 200px;
+        }
+        .box1{
+            background-color: white;
+            border: 5px solid grey;
+            width: 500px;
+            height: 700px;
+        }
+        .box2{
+            background-color: rgb(50,189,254);
+            border: 5px solid grey;
+            width: 380px;
+            height: 700px;
+            text-align: center;
+            font-size: 30px;
+        }
+        #h1{
+            text-align: center;
+            font-size: 30px;
+        }
+        p{
+             font-size: 25px;
+            color: black;
+            font-family:'Arial Narrow Bold', sans-serif;
+            font-weight: bold;
+             margin-left: 50px;
+        }
+        input{
+            font-size: 20px;
+        }
+        a{
+            text-decoration: none;
+            font-size: 30px;
+            color: black;
+        }
+        button{
+            margin-top: 20px;
+            background-color:white;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="h1">PAYMENT PAGE</h1>
+    <div id="box">
+        <div class="box1"> 
+            <div id="fooddiv"></div>
+        </div>
+        <div class="box2">
+           <h1 id="h1">ADRESS_SECTION</h1>
+           <label for="">Name:</label>
+           <input type="text" placeholder="Enter Name">
+           <label for="">Email:</label>
+           <input type="email" name="" id="" placeholder="Enter Email">
+           <label for="">Mobile:</label>
+           <input type="number" name="" id="" placeholder="Enter Mobile_Number">
+           <label for="">City:</label>
+           <input type="text" name="" id="" placeholder="Enter city">
+           <label for="">Pin:</label>
+           <input type="number" name="" id="" placeholder="Enter Pincode">
+           <label for="">Near:</label>
+           <input type="text" name="" id="" placeholder="Enter Near_place">
+           <button><a href="otp.html">Submit</a></button>
+
+           <h1 id="h1">PAYMENT_SECTION</h1>
+           <label for="">Name:</label>
+           <input type="text" placeholder="Enter Name">
+           <label for="">Card</label>
+           <input type="number" name="" id="" placeholder="Enter Card Number=16digit">
+           <label for="">CVV</label>
+           <input type="number" placeholder="Enter Cvv Number=3digit">
+           <label for="">Price:</label>
+           <input type="number" placeholder="Price_IS_AutoFill">
+           <button><a href="otp.html">Goto_OTP</a></button>
+        </div>
+    </div>
+   
+</body>
+</html>
+
+<script>
+
+    //var food_data = JSON.parse(localStorage.getItem("foodkey")) || [];
+    async function getData() {
+
+        try {
+            let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata`;
+
+            let res = await fetch(url);
+            let data = await res.json();
+            let user = data.meals;
+            showData(user)
+            console.log("data", user);
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    getData();
+    function showData(user) {
+
+        user.forEach(function (el) {
+
+            let maindiv = document.getElementById("fooddiv");
+            let div = document.createElement("div");
+            maindiv.appendChild(div);
+            let img = document.createElement("img");
+            img.src = el.strMealThumb;
+
+            let p1 = document.createElement("p");
+            p1.innerText = el.strCategory;
+
+            let tag = document.createElement("p");
+            tag.innerText = el.strTags;
+
+            let ytb = document.createElement("link");
+            ytb.href = el.strYoutube;
+
+            var x = Math.floor(Math.random() * 500)
+            //console.log(x);
+            let price = document.createElement("p");
+            price.innerText = "Price_" + x;
+
+            // let btn = document.createElement("button");
+            // btn.innerText = "GotoPayment";
+
+            let total = document.createElement("p");
+            total.innerText = "Total_Price_" + x;
+
+            div.append(img, p1, tag, ytb, price, total);
+
+        })
+    }
+// we used same code for showing product ecept other change
+</script>

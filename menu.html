@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu_Page</title>
+    <style>
+         body{
+            background-color: rgb(251,213,144);
+        }
+        #box{
+            background-color: white;
+            border: 2px solid black;
+            width: 400px;
+            height: 630px;
+            margin: auto;
+        }
+
+        #fooddiv {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            width: 300p;
+            height: 300px;
+            margin-top: 80px;
+            margin-left: 50px;
+
+        }
+    
+        img {
+            border: 5px solid grey;
+            width: 300p;
+            height: 300px;
+        }
+        p{
+            font-size: 25px;
+            color: black;
+            font-family:'Arial Narrow Bold', sans-serif;
+            font-weight: bold;
+             margin-left: 80px;
+        }
+        button{
+            font-size: 25px;
+            background-color: black;
+            color: white;
+            margin-left: 80px;
+        }
+        #h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="food.html"></a>
+    <a href="foodcart.html"></a>
+    <a href="menu.html"></a>
+    <a href="otp.html"></a>
+    <h1 id="h1">Menu_page</h1>
+    <div id="box">
+    <div id="fooddiv"></div>
+    </div>
+   
+</body>
+</html>
+
+<script>
+
+    //var food_data = JSON.parse(localStorage.getItem("foodkey"))||[];
+    async function getData() {
+        try {
+            let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata`;
+
+            let res = await fetch(url);
+            let data = await res.json();
+            let user = data.meals;
+            showData(user)
+            console.log("data", user);
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    getData();
+    function showData(user) {
+
+        user.forEach(function (el) {
+
+            let maindiv = document.getElementById("fooddiv");
+            let div = document.createElement("div");
+            maindiv.appendChild(div);
+            let img = document.createElement("img");
+            img.src = el.strMealThumb;
+
+            let p1 = document.createElement("p");
+            p1.innerText = el.strCategory;
+
+            let tag = document.createElement("p");
+            tag.innerText = el.strTags;
+
+            let ytb = document.createElement("link");
+            ytb.href = el.strYoutube;
+            
+            var x = Math.floor(Math.random()*500+1)
+            //console.log(x);
+            let price = document.createElement("p");
+            price.innerText = "Price_" + x;
+
+            let btn = document.createElement("button");
+            btn.innerText = "GotoCart";
+
+            btn.addEventListener("click",function(){
+                addtocart(user);
+            });
+
+            
+            div.append(img, p1, tag, ytb,price,btn);
+
+        })
+    }
+
+  // we use same page in food cart page copy sam ecode 
+    function addtocart(user) {
+        //console.log(user);
+        //food_data.push(user);
+        //localStorage.setItem("foodkey",JSON.stringify(food_data));
+        // we dont store data in local storage
+        window.location.href="foodcart.html"
+    }
+
+</script>

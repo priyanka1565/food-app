@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart_food</title>
+    <style>
+        body{
+            background-color: rgb(251,213,144);
+        }
+        #fooddiv {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            width: 300p;
+            height: 300px;
+        }
+    
+        img {
+            width: 300p;
+            height: 300px;
+        }
+         #box{
+            background-color: white;
+            border: 2px solid black;
+            width: 400px;
+            height: 700px;
+            margin: auto;
+        }
+
+        #fooddiv {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            width: 300p;
+            height: 300px;
+            margin-top: 80px;
+            margin-left: 50px;
+
+        }
+    
+        img {
+            border: 5px solid grey;
+            width: 300p;
+            height: 300px;
+        }
+        p{
+            font-size: 25px;
+            color: black;
+            font-family:'Arial Narrow Bold', sans-serif;
+            font-weight: bold;
+             margin-left: 80px;
+        }
+        button{
+            font-size: 25px;
+            background-color: black;
+            color: white;
+            margin-left: 80px;
+        }
+        #h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="food.html"></a>
+    <a href="foodcart.html"></a>
+    <a href="menu.html"></a>
+    <a href="otp.html"></a>
+
+    <h1 id="h1">Cart_Page</h1>
+    <div id="box">
+    <div id="fooddiv"></div>
+    </div>
+    
+</body>
+</html>
+
+<script>
+
+    //var food_data = JSON.parse(localStorage.getItem("foodkey")) || [];
+    async function getData() {
+        try {
+            let url = `https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata`;
+
+            let res = await fetch(url);
+            let data = await res.json();
+            let user = data.meals;
+            showData(user)
+            console.log("data", user);
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    getData();
+    function showData(user) {
+
+        user.forEach(function (el) {
+
+            let maindiv = document.getElementById("fooddiv");
+            let div = document.createElement("div");
+            maindiv.appendChild(div);
+            let img = document.createElement("img");
+            img.src = el.strMealThumb;
+
+            let p1 = document.createElement("p");
+            p1.innerText = el.strCategory;
+
+            let tag = document.createElement("p");
+            tag.innerText = el.strTags;
+
+            let ytb = document.createElement("link");
+            ytb.href = el.strYoutube;
+
+            var x = Math.floor(Math.random() * 500)
+            console.log(x);
+            let price = document.createElement("p");
+            price.innerText = "Price_" + x;
+
+            let btn = document.createElement("button");
+            btn.innerText = "GotoPayment";
+
+            btn.addEventListener("click",function(){
+                payment();
+            })
+            
+            let total = document.createElement("p");
+            total.innerText = "Total_Price_" + x;
+           
+            div.append(img, p1, tag, ytb, price,total,btn);
+
+        })
+    }
+// we use same code a menu page
+    function payment(){
+        window.location.href ="payment.html"
+    }
+  
+</script>
